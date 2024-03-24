@@ -5,7 +5,7 @@ import os
 
 load_dotenv()
 
-openai.api_key = "GPT_API_KEY"
+openai.api_key = os.getenv("GPT_API_KEY")
 print("Welcome! How can I assist you today?\n")
 
 while True:

@@ -1,3 +1,4 @@
+# openai==0.28
 import openai
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from dotenv import load_dotenv
@@ -5,7 +6,7 @@ import os
 
 load_dotenv()
 
-openai.api_key = "GPT_API_KEY"
+openai.api_key = os.getenv("GPT_API_KEY")
 
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! I am a Work-In-Progress GPT Bot!")
@@ -26,10 +27,9 @@ def ask_gpt(question):
 
 def main():
     # Create the Updater and pass it your bot's token.
-    updater = Updater(token='TG_TOKEN', use_context=True)
+    updater = Updater(token=os.getenv("TG_TOKEN"), use_context=True)
     dp = updater.dispatcher
 
-    # Define handlers
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, reply_message))
 

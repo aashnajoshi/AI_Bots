@@ -6,7 +6,7 @@ import os
 
 load_dotenv()
 
-openai.api_key = "GPT_API_KEY"
+openai.api_key = os.getenv("GPT_API_KEY")
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -30,5 +30,6 @@ class MyClient(discord.Client):
 
 intents = discord.Intents.default()
 intents.messages = True
+
 client = MyClient(intents=intents)
-client.run('DISCORD_TOKEN')
+client.run(os.getenv("DISCORD_TOKEN"))
