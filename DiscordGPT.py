@@ -1,8 +1,12 @@
 # openai==0.28
 import openai
 import discord
+from dotenv import load_dotenv
+import os
 
-openai.api_key = "YOUR_OPENAI_API_KEY"
+load_dotenv()
+
+openai.api_key = "GPT_API_KEY"
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -27,4 +31,4 @@ class MyClient(discord.Client):
 intents = discord.Intents.default()
 intents.messages = True
 client = MyClient(intents=intents)
-client.run('YOUR_DISCORD_BOT_TOKEN')
+client.run('DISCORD_TOKEN')

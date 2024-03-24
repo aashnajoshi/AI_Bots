@@ -1,7 +1,11 @@
 # openai==0.28
 import openai
+from dotenv import load_dotenv
+import os
 
-openai.api_key = "YOUR_OPENAI_API_KEY"
+load_dotenv()
+
+openai.api_key = "GPT_API_KEY"
 print("Welcome! How can I assist you today?\n")
 
 while True:
@@ -10,6 +14,7 @@ while True:
     if any(greeting in ques.lower() for greeting in greetings):
         print("Bot: Hello! How can I help you?")
         continue
+
     response = openai.Completion.create(prompt=ques, model="gpt-3.5-turbo-instruct", max_tokens=150,)
     print("Bot:", response.choices[0].text.strip(), "\n")
     further_question = input("Do you have any further questions? (Y/N): ").capitalize()

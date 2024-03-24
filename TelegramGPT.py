@@ -1,6 +1,9 @@
 import openai
-import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 openai.api_key = "GPT_API_KEY"
 
@@ -23,7 +26,7 @@ def ask_gpt(question):
 
 def main():
     # Create the Updater and pass it your bot's token.
-    updater = Updater(token='TG_BOT_TOKEN', use_context=True)
+    updater = Updater(token='TG_TOKEN', use_context=True)
     dp = updater.dispatcher
 
     # Define handlers
