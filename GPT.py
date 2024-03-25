@@ -19,7 +19,7 @@ def handle_input(prompt, model_type):
             
         elif model_type == "image":
             response = openai.Image.create(prompt=user_input, n=1)
-            print(response['data'][0]['url'])
+            print(f"Here's an image link to \"{user_input}\"\n\n",response['data'][0]['url'])
 
         further_question = input("Do you want to explore the bot further? (Y/N): ").capitalize()
         while further_question not in {"Y", "N"}:
