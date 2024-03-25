@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-
 openai.api_key = os.getenv("GPT_API_KEY")
 
 class MyClient(discord.Client):
@@ -16,20 +15,36 @@ class MyClient(discord.Client):
         if message.author == self.user:  # Ignore messages from bot
             return
         if self.user in message.mentions:  # Check bot mention
-            if any(word in message.content.lower() for word in ["hi", "hello", "hey", "greetings"]):
-                await message.channel.send(f"Hello {message.author.mention}! I am a Work-In-Progress GPT Bot!")
-            else:
-                question = message.content.replace(f'<@!{self.user.id}>', '').strip()  # Remove bot mention
-                response = self.ask_gpt(question)
-                await message.channel.send(f"{message.author.mention}, {response}")
+            await self.handle_input(message)
 
-    def ask_gpt(self, question):
-        prompt = f"Question: {question}\nAnswer:"
-        response = openai.Completion.create(prompt=prompt, model="gpt-3.5-turbo-instruct", max_tokens=150,)
-        return response.choices[0].text.strip()
+    async def handle_input(self, message):
+        user_input = message.content.replace(f'<@!{self.user.id}>', '').strip()  # Remove bot mention
+        if any(greeting in user_input.lower() for greeting in ["hi", "hello", "hey", "greetings"]):
+            await message.channel.send(f"Hello {message.author.mention}! I am a Work-In-Progress GPT Bot!")
+            return
+        if "image" in user_input.lower():
+            await self.image_generator(message.channel, user_input)
+        else:
+            await self.chatbot(message.channel, user_input)
+
+    async def chatbot(self, channel, user_input):
+        response = self.ask_gpt(user_input, "text")
+        await channel.send(response)
+
+    async def image_generator(self, channel, user_input):
+        await channel.send("Describe the image you want to be generated:")
+        response = self.ask_gpt(user_input, "image")
+        await channel.send(f"Here's an image link to \"{user_input}\":\n{response}")
+
+    def ask_gpt(self, user_input, model_type):
+        if model_type == "text":
+            response = openai.Completion.create(prompt=user_input, model="gpt-3.5-turbo-instruct", max_tokens=150,)
+            return response.choices[0].text.strip()
+        elif model_type == "image":
+            response = openai.Image.create(prompt=user_input, n=1, model="dall-e-3",)
+            return response['data'][0]['url']
 
 intents = discord.Intents.default()
 intents.messages = True
-
 client = MyClient(intents=intents)
 client.run(os.getenv("DISCORD_TOKEN"))

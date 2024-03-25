@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-
 openai.api_key = os.getenv("GPT_API_KEY")
 
 def start(update, context):
@@ -22,6 +21,7 @@ def ask_gpt(question):
         prompt = f"Question: {question}\nAnswer:"
         response = openai.Completion.create(prompt=prompt, model="gpt-3.5-turbo-instruct", max_tokens=150)
         return response.choices[0].text.strip()
+        
     except Exception as e:
         return f"An error occurred: {e}"
 
