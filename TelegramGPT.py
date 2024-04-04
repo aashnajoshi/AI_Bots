@@ -1,7 +1,6 @@
-# openai==0.28
-import openai
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from dotenv import load_dotenv
+import openai # openai==0.28
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters #python-telegram-bot
+from dotenv import load_dotenv #python-dotenv
 import os
 
 load_dotenv()
