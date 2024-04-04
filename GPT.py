@@ -43,7 +43,7 @@ while True:
     elif choice == "2":
         image_generator()
     elif choice == "3":
-        print("Goodbye!")
+        print("Thank you for using our service. Goodbye!")
         break
     else:
         print("Invalid choice. Please choose again.")
