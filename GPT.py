@@ -1,5 +1,5 @@
-import openai # openai==0.28
-from dotenv import load_dotenv #python-dotenv
+import openai
+from dotenv import load_dotenv
 import os
 
 load_dotenv()

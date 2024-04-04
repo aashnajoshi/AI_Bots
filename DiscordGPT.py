@@ -1,6 +1,6 @@
-import openai # openai==0.28
-import discord #discord.py
-from dotenv import load_dotenv #python-dotenv
+import openai
+import discord
+from dotenv import load_dotenv
 import os
 
 load_dotenv()
