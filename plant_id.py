@@ -9,7 +9,7 @@ load_dotenv()
 def identify_plant(image_path):
     api = PlantApi(api_key= os.getenv("PLANT_API"))
 
-    # Logic to identify plant from the url and name
+    # Logic to identify plant from the url and name (TBM)
     usage: UsageInfo = api.usage_info()
     identification: PlantIdentification = api.identify(image_path)
     identification_with_different_views: PlantIdentification = api.get_identification(identification.access_token)
