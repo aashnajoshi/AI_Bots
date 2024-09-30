@@ -1,4 +1,4 @@
-import requests
+from kindwise import PlantApi, PlantIdentification, UsageInfo
 from dotenv import load_dotenv
 import os
 from tkinter import Tk
@@ -7,23 +7,13 @@ from tkinter.filedialog import askopenfilename
 load_dotenv()
 
 def identify_plant(image_path):
-    api_key = os.getenv("PLANT_API")
-    url = os.getenv("PLANT_URL")
+    api = PlantApi(api_key= os.getenv("PLANT_API"))
 
     # Logic to identify plant from the url and name
-
-def print_plant_info(plant_data):
-    if 'suggestions' in plant_data and len(plant_data['suggestions']) > 0:
-        suggestion = plant_data['suggestions'][0]
-        print("Scientific Name:", suggestion['scientific_name'])
-        print("Common Name:", suggestion['common_names'])
-        
-        if 'medicinal_uses' in suggestion and suggestion['medicinal_uses']:
-            print("Medicinal Uses:", suggestion['medicinal_uses'])
-        else:
-            print("No medicinal uses found.")
-    else:
-        print("No plant identified.")
+    usage: UsageInfo = api.usage_info()
+    identification: PlantIdentification = api.identify(image_path)
+    identification_with_different_views: PlantIdentification = api.get_identification(identification.access_token)
+    api.delete_identification(identification)
 
 def main():
     Tk().withdraw()
