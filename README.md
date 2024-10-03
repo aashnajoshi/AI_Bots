@@ -1,4 +1,4 @@
-# AI_Bots
+# AI Bots
 A compilation of AI-powered bots that use APIs for various platforms, such as Discord, Telegram, YouTube, and more. These bots perform tasks ranging from generating text responses and images to summarizing YouTube videos and identifying plant species.
 
 ## Features
