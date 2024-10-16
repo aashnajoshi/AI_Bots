@@ -1,6 +1,6 @@
 streamlit
 playwright==1.35.0
-﻿openai==0.28.0
+openai==0.28.0
 python-dotenv==1.0.1
 discord.py==2.3.2
 google-api-python-client==2.126.0
