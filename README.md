@@ -17,7 +17,8 @@ pip install -r requirements.txt
   python {file_name}.py
 ```
 ## Description about various files:
-- **.env** Contains all the credentials and secret information.
+- **.env:** Contains all the credentials and secret information.
+- **AIScrape.py:** An AI-based Webscrapper that takes url and prompt from user to customize the webscrapping process as per need.
 - **Console_GPT:** An interactive command-line assistant that provides text responses or generates images based on user prompts.
 - **Discord_GPT:** A discord chatbot that responds to user messages with text replies or generates images based on prompts when mentioned in a channel.
 - **GenAI_Model:** A notebook exploring text generation and image creation using AI models.
