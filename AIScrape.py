@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-openai.api_key = os.getenv('OPENAI_API_KEY')
+openai.api_key = os.getenv('GPT_API_KEY')
 
 st.title("AI Web Scraper")
 url = st.text_input("Enter the URL of the website you want to scrape:")
